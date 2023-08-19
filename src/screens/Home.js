@@ -3,6 +3,7 @@ import Card from "../components/Cards1"
 // import Carousel from '../components/Carousel'
 import Footer from '../screens/Footer'
 import Navbar from '../components/Navbar'
+import { BottomNavigation } from '@mui/material';
 export default function Home() {
   const [foodCat, setFoodCat] = useState([])
   const [foodItems, setFoodItems] = useState([])
@@ -15,23 +16,23 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json'
       }
-
+      
     });
     response = await response.json()
     // console.log(response[1][0].CategoryName)
     setFoodItems(response[0])
     setFoodCat(response[1])
   }
-
+  
   useEffect(() => {
     loadFoodItems()
   }, [])
-
+  
   return (
     <div >
       <div>
         <Navbar />
-        <div id="cart-root"></div>
+      <div id="cart-root"></div>
 
       </div>
       <div>
@@ -67,10 +68,10 @@ export default function Home() {
       <div className='container'> {/* boootstrap is mobile first */}
         {
           foodCat !== []
-            ? foodCat.map((data) => {
-              return (
-                // justify-content-center
-                <div className='row mb-3'>
+          ? foodCat.map((data) => {
+            return (
+              // justify-content-center
+              <div className='row mb-3'>
                   <div key={data.id} className='fs-3 m-3'>
                     {data.CategoryName}
                   </div>
@@ -91,6 +92,7 @@ export default function Home() {
             : ""}
       </div>
       <Footer />
+    
     </div>
 
 

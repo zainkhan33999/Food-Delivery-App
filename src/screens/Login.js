@@ -16,7 +16,7 @@ export default function Login() {
       },
       body: JSON.stringify({ email: credentials.email, password: credentials.password })
 
-    });
+    })
     const json = await response.json()
     console.log(json);
     if (json.success) {

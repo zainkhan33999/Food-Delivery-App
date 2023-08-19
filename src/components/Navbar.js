@@ -6,6 +6,8 @@ import { useCart } from './ContextRuducer';
 import Modal from '../Modal';
 import Cart from '../screens/Cart';
 
+
+
 export default function Navbar() {
   const [cartView, setCartView] = useState(false);
   const navigate = useNavigate();
@@ -24,9 +26,11 @@ export default function Navbar() {
   const authToken = localStorage.getItem('authToken');
 
   return (
+  
+    
     <div>
       <nav
-        className="navbar navbar-expand-lg navbar-dark bg-success position-sticky"
+        className="navbar navbar-expand-lg navbar-dark bg-black position-sticky"
         style={{
           boxShadow: '0px 10px 20px black',
           filter: 'blur(20)',
@@ -35,8 +39,15 @@ export default function Navbar() {
           width: '100%',
         }}
       >
+        {/* <nav class="">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="https://www.clipartmax.com/png/middle/6-67623_chief-clipart-png-chef-logo-design-ideas.png" alt="Bootstrap" width="90" height="80"/>
+    </a>
+  </div>
+</nav> */}
         <div className="container-fluid">
-          <Link className="navbar-brand fs-1 fst-italic" to="/">
+          <Link className="navbar-brand fs-1 fst-italic " to="/">
             GoFood
           </Link>
           <button
@@ -62,7 +73,7 @@ export default function Navbar() {
                   <Link className="nav-link fs-5 mx-4 active" aria-current="page" to="/myOrder">
                     My Orders
                   </Link>
-                  <button onClick={handleLogout} className="btn bg-danger text-white  ">
+                  <button onClick={handleLogout} className="btn  text-danger  ">
                     Logout
                   </button>
                  </div>
@@ -70,10 +81,10 @@ export default function Navbar() {
             </ul>
             {!authToken ? (
               <form className="d-flex">
-                <Link className="btn bg-white text-success mx-1" to="/login">
+                <Link className="btn text-success mx-1" to="/login">
                   Login
                 </Link>
-                <Link className="btn bg-white text-success mx-1" to="/creatuser">
+                <Link className="btn  text-success mx-1" to="/creatuser">
                   Signup
                 </Link>
               </form>
@@ -82,7 +93,7 @@ export default function Navbar() {
             )}
             {authToken &&(
               <div>
-                <div className="btn bg-white text-success mx-2" onClick={loadCart}>
+                <div className="btn bg-white text-primary mx-2" onClick={loadCart}>
                   <Badge color="secondary" badgeContent={items.length}>
                     <ShoppingCartIcon />
                   </Badge>
