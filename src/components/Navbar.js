@@ -24,6 +24,7 @@ export default function Navbar() {
   const items = useCart();
 
   const authToken = localStorage.getItem('authToken');
+  const seller = localStorage.getItem("Seller")
 
   return (
   
@@ -69,14 +70,24 @@ export default function Navbar() {
                 </Link>
               </li>
               {authToken && (
-                <div className='d-flex'>
+                <div className='d=flex'>
+                 (
+                  <Link className="nav-link fs-5 mx-4 active" aria-current="page" to="/myProducts"> {/* Change the link destination */}
+                    My Products
+                  </Link>
+                ) : (
                   <Link className="nav-link fs-5 mx-4 active" aria-current="page" to="/myOrder">
                     My Orders
+                  <Link className='btn text-success mx-1' to="/createseller">
+                  Become a Seller
+                </Link>
                   </Link>
+                )
                   <button onClick={handleLogout} className="btn  text-danger  ">
                     Logout
                   </button>
                  </div>
+                 
               )}
             </ul>
             {!authToken ? (
@@ -87,6 +98,7 @@ export default function Navbar() {
                 <Link className="btn  text-success mx-1" to="/creatuser">
                   Signup
                 </Link>
+               
               </form>
             ) : (
               ''

@@ -12,6 +12,7 @@ app.use(express.json())
 app.use('/api',require("./Routers/createUser"));
 app.use('/api',require("./Routers/displayData"));
 app.use('/api', require("./Routers/orderData"));
+app.use('/api',require("./Routers/createSeller"))
 
 app.listen(port ,()=>{
     console.log(`Example app is listening on port ${port}`)

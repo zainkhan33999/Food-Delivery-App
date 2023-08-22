@@ -7,11 +7,12 @@ import {
   Link
 } from "react-router-dom";
 import Login from './screens/Login';
-import Signup from './screens/Signup';
 import 'bootstrap-dark-5/dist/css/bootstrap-dark.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import { CartProvider } from './components/ContextRuducer';
 import MyOrder from './screens/MyOrder';
+import Signup from './screens/userSign.js';
+import Seller from './screens/sellerSign.js';
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/" element={<Home/>} />
         <Route exact path="/login" element={<Login/>} />
         <Route exact path = "/creatuser" element = {<Signup/>}/>
+        <Route exact path = "/createseller" element = {<Seller/>}/>
         <Route exact path = "/myOrder" element = {<MyOrder/>}/>
       </Routes>
       </div>

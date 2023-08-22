@@ -58,7 +58,7 @@ let totalPrice = data.reduce((total, food) => total + food.price, 0)
                     <td >{food.name}</td>
                     <td>{food.qty}</td>
                     <td>{food.size}</td>
-                    <td>{food.price}</td>
+                    <td className='text-success'>{food.price}</td>
                     <td ><button type="button" className="btn p-0"><Delete onClick={() => { dispatch({ type: "REMOVE", index: index }) }} /></button> </td></tr>
                 ))}
               </tbody>
