@@ -21,10 +21,12 @@ export default function Navbar() {
     setCartView(true);
   };
 
+  
+
   const items = useCart();
 
   const authToken = localStorage.getItem('authToken');
-  const seller = localStorage.getItem("Seller")
+  const sellToken = localStorage.getItem("sellToken")
 
   return (
   
@@ -69,55 +71,56 @@ export default function Navbar() {
                   Home
                 </Link>
               </li>
-              {authToken && (
-                <div className='d=flex'>
-                 (
-                  <Link className="nav-link fs-5 mx-4 active" aria-current="page" to="/myProducts"> {/* Change the link destination */}
+              {authToken && sellToken ? (
+                <div className='d-flex'>
+                  <Link className="nav-link fs-5 mx-4 active" aria-current="page" to="/MyProducts">
                     My Products
                   </Link>
-                ) : (
-                  <Link className="nav-link fs-5 mx-4 active" aria-current="page" to="/myOrder">
-                    My Orders
-                  <Link className='btn text-success mx-1' to="/createseller">
-                  Become a Seller
-                </Link>
+                  <Link className='btn text-warning mx-1' to="/createseller">
+                    Switch To User
                   </Link>
-                )
-                  <button onClick={handleLogout} className="btn  text-danger  ">
+                  <button onClick={handleLogout} className="btn text-danger">
                     Logout
                   </button>
-                 </div>
-                 
-              )}
-            </ul>
-            {!authToken ? (
-              <form className="d-flex">
-                <Link className="btn text-success mx-1" to="/login">
-                  Login
-                </Link>
-                <Link className="btn  text-success mx-1" to="/creatuser">
-                  Signup
-                </Link>
-               
-              </form>
-            ) : (
-              ''
-            )}
-            {authToken &&(
-              <div>
-                <div className="btn bg-white text-primary mx-2" onClick={loadCart}>
-                  <Badge color="secondary" badgeContent={items.length}>
-                    <ShoppingCartIcon />
-                  </Badge>
-                  Cart
                 </div>
-                {cartView && (
-                  <Modal onClose={() => setCartView(false)}>
-                    <Cart />
-                  </Modal>
-                )}
-              </div>
-            )}
+              ) : null}
+
+              {/* Display if only authToken is present */}
+              {authToken && !sellToken ? (
+  <div className='d-flex'>
+    <Link className="nav-link fs-5 mx-4 active" aria-current="page" to="/myOrder">
+      My Orders
+    </Link>
+    <Link className='btn text-success mx-1' to="/createseller">
+      Become a Seller
+    </Link>
+    <div className="btn bg-white text-primary mx-2" onClick={loadCart}>
+      <Badge color="secondary" badgeContent={items.length}>
+        <ShoppingCartIcon />
+      </Badge>
+      Cart
+    </div>
+    {cartView && (
+      <Modal onClose={() => setCartView(false)}>
+        <Cart />
+      </Modal>
+    )}
+  </div>
+) : null}
+
+
+              {/* Display if neither authToken nor sellToken is present */}
+              {!authToken && !sellToken ? (
+                <form className="d-flex">
+                  <Link className="btn text-success mx-1" to="/login">
+                    Login
+                  </Link>
+                  <Link className="btn text-warning mx-1 " to="/creatuser">
+                    Signup
+                  </Link>
+                </form>
+              ) : null}
+            </ul>
           </div>
         </div>
       </nav>

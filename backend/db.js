@@ -1,38 +1,37 @@
 const mongoose = require("mongoose");
-const mongoURI = "mongodb+srv://QuickBites:quickbites@cluster0.j3bnfkm.mongodb.net/QuickBites";
+const mongoURI = "mongodb+srv://QuickBites:123@cluster0.j3bnfkm.mongodb.net/QuickBites";
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-    console.log('Connected to MongoDB');
-
-    fetchData();
-  } catch (error) {
-    console.error('Error connecting to MongoDB: ', error);
-  }
+let cachedData = {
+  food_items: [],
+  food_category: []
 };
 
 async function fetchData() {
   try {
-    const fetched_data = mongoose.connection.db.collection("food_items"); 
-    const data = await fetched_data.find({}).toArray()
-     global.food_items = data 
- 
- 
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-
-  try {
-    const fetched_data = mongoose.connection.db.collection("food_category"); 
-    const categoryData = await fetched_data.find({}).toArray()
-     global.food_category = categoryData 
-    
- 
+    const fetched_data = mongoose.connection.db.collection("foods_items"); 
+    cachedData.food_items = await fetched_data.find({}).toArray();
+   
+    const fetched_category_data = mongoose.connection.db.collection("food_category"); 
+    cachedData.food_category = await fetched_category_data.find({}).toArray();
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 }
 
-module.exports = connectDB;
+const connectDB = async () => {
+  try {
+    await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+    
+    console.log('Connected to MongoDB');
+
+    await fetchData(); // Wait for fetchData to complete
+  } catch (error) {
+    console.error('Error connecting to MongoDB: ', error);
+  }
+};
+
+const getCachedData = () => cachedData;
+
+module.exports = { connectDB, getCachedData };
+
+

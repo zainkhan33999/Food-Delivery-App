@@ -13,6 +13,7 @@ import { CartProvider } from './components/ContextRuducer';
 import MyOrder from './screens/MyOrder';
 import Signup from './screens/userSign.js';
 import Seller from './screens/sellerSign.js';
+import MyProducts from './screens/MyProducts';
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Route exact path = "/creatuser" element = {<Signup/>}/>
         <Route exact path = "/createseller" element = {<Seller/>}/>
         <Route exact path = "/myOrder" element = {<MyOrder/>}/>
+        <Route exact path = "/MyProducts" element = {<MyProducts/>}/>
       </Routes>
       </div>
     </Router>

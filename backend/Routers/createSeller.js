@@ -8,8 +8,6 @@ jwtSecret = "mynameiszainkhanilikecoffe"
 router.post(
   "/createvendor",
   async (req, res) => {
-      const salt = await bcrypt.genSalt(10)
-      let securePassword = await bcrypt.hash(req.body.vendorpassword, salt)
       try {
         const salt = await bcrypt.genSalt(10);
         const securePassword = await bcrypt.hash(req.body.vendorpassword, salt);
@@ -42,4 +40,4 @@ router.post(
   
   module.exports = router;
 
-module.exports = router;
+
