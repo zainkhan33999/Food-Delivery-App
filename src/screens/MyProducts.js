@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-
 function MenuForm ({ onSubmit }) {
+  const navigate = useNavigate(); // Initialize the useNavigate hook
+  
+  
     const [CategoryName, setCategoryName] = useState('');
     const [name, setItemName] = useState('');
     const [img, setItemImg] = useState('');
@@ -15,8 +18,11 @@ function MenuForm ({ onSubmit }) {
      
     );
     const [description, setItemDescription] = useState('');
-      
-  const handleSubmit = async(e) => {
+    const [products, setProducts] = useState([]);
+    const previewHandler = () =>{
+       navigate("/")
+    }
+    const handleSubmit = async(e) => {
     e.preventDefault();
     const newItem = {
         CategoryName: CategoryName,
@@ -40,20 +46,40 @@ function MenuForm ({ onSubmit }) {
     })
     console.log(response)
 if(response.ok){
+
+  setProducts([...products, newItem])
   const updatedDataResponse = await fetch("http://localhost:5000/api/sam");
   const updatedData = await updatedDataResponse.json();
   if (typeof onSubmit === 'function') {
       onSubmit(updatedData);
     }
 }
+
+
     // Reset form fields here
     setCategoryName('');
     setItemName('');
     setItemImg('');
     Setoptions("")
     setItemDescription('');
-
     
+    
+  };
+
+  const handleDelete = async (productId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/deleteProduct/${productId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // Remove the deleted product from the products array in state
+        const updatedProducts = products.filter((product) => product._id !== productId);
+        setProducts(updatedProducts);
+      }
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
   };
   const handleOptionChange = (optionName, value) => {
     Setoptions((prevOptions) => ({
@@ -61,11 +87,12 @@ if(response.ok){
       [optionName]: value,
     }));
   };
-
+  
   const renderOptions = () => {
     if (CategoryName === 'Pizza') {
       return (
         <>
+       
           <label>Small Price:</label>
           <input
             type="text"
@@ -111,18 +138,15 @@ if(response.ok){
           />
         </>
       );
+      
     } else {
       return null; // Return null when no specific options are needed
     }
   };
-  
-    
-  
-  
-
   return (
     <>
     <Navbar/>
+    
     <div className="container mt-5  ">
       <h2>Add New Menu Item</h2>
       <form  onSubmit={handleSubmit}>
@@ -182,7 +206,26 @@ if(response.ok){
         </button>
       </form>
     </div>
-  </>
+    <div className="container mt-5">
+        <h1 className='text-center'>My Products</h1>
+        <div className='row'>
+          {products.map((product, index) => (
+            <div key={index} className="col-md-4 mb-3">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">{product.name}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">{product.CategoryName}</h6>
+                  <p className="card-text">{product.description}</p>
+                </div>
+              </div>
+              <button  onClick={previewHandler} className='bg-success'>Preview</button>
+              <button onClick={() => handleDelete(product._id)}  className='bg-danger'>Delete</button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
+
 export default MenuForm ;

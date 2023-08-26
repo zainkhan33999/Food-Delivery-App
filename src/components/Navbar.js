@@ -16,7 +16,9 @@ export default function Navbar() {
     localStorage.removeItem('authToken');
     navigate('./login');
   };
-
+const handleUser = () =>{
+  localStorage.removeItem('sellToken')
+}
   const loadCart = () => {
     setCartView(true);
   };
@@ -76,9 +78,9 @@ export default function Navbar() {
                   <Link className="nav-link fs-5 mx-4 active" aria-current="page" to="/MyProducts">
                     My Products
                   </Link>
-                  <Link className='btn text-warning mx-1' to="/createseller">
-                    Switch To User
-                  </Link>
+                <button onClick={handleUser}>
+                  Switch To User
+                </button>
                   <button onClick={handleLogout} className="btn text-danger">
                     Logout
                   </button>
@@ -86,7 +88,9 @@ export default function Navbar() {
               ) : null}
 
               {/* Display if only authToken is present */}
+          
               {authToken && !sellToken ? (
+                <>
   <div className='d-flex'>
     <Link className="nav-link fs-5 mx-4 active" aria-current="page" to="/myOrder">
       My Orders
@@ -100,13 +104,18 @@ export default function Navbar() {
       </Badge>
       Cart
     </div>
+    
     {cartView && (
       <Modal onClose={() => setCartView(false)}>
         <Cart />
       </Modal>
     )}
   </div>
-) : null}
+ <button onClick={handleLogout} className="btn text-danger">
+           Logout
+              </button>
+</>
+) : null}  
 
 
               {/* Display if neither authToken nor sellToken is present */}
