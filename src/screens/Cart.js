@@ -1,9 +1,11 @@
 import React from 'react'
 import Delete from '@mui/icons-material/Clear';
 import { useCart, useDispatchCart } from '../components/ContextRuducer';
+import { useNavigate } from 'react-router-dom';
 export default function Cart() {
   let data = useCart();
   let dispatch = useDispatchCart();
+  let navigate = useNavigate();
   if (data.length === 0) {
     return (
       <div>
@@ -12,6 +14,8 @@ export default function Cart() {
     )
 }
 const handleCheckOut = async () => {
+  alert("Thanks For Your Order")
+  navigate("/")
   let userEmail = localStorage.getItem("userEmail");
   // console.log(data,localStorage.getItem("userEmail"),new Date())
   const response = await fetch("http://localhost:5000/api/orderData", {

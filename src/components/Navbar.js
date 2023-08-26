@@ -18,12 +18,13 @@ export default function Navbar() {
   };
 const handleUser = () =>{
   localStorage.removeItem('sellToken')
+  navigate("/")
 }
   const loadCart = () => {
     setCartView(true);
   };
 
-  
+ 
 
   const items = useCart();
 
@@ -78,12 +79,10 @@ const handleUser = () =>{
                   <Link className="nav-link fs-5 mx-4 active" aria-current="page" to="/MyProducts">
                     My Products
                   </Link>
-                <button onClick={handleUser}>
+                <button className='btn text-warning' onClick={handleUser}>
                   Switch To User
                 </button>
-                  <button onClick={handleLogout} className="btn text-danger">
-                    Logout
-                  </button>
+                 
                 </div>
               ) : null}
 
@@ -95,10 +94,10 @@ const handleUser = () =>{
     <Link className="nav-link fs-5 mx-4 active" aria-current="page" to="/myOrder">
       My Orders
     </Link>
-    <Link className='btn text-success mx-1' to="/createseller">
+    <Link className='btn text-success mx-1 mt-1' to="/createseller">
       Become a Seller
     </Link>
-    <div className="btn bg-white text-primary mx-2" onClick={loadCart}>
+    <div className="btn text-info text-primary mt-1" onClick={loadCart}>
       <Badge color="secondary" badgeContent={items.length}>
         <ShoppingCartIcon />
       </Badge>
@@ -111,9 +110,7 @@ const handleUser = () =>{
       </Modal>
     )}
   </div>
- <button onClick={handleLogout} className="btn text-danger">
-           Logout
-              </button>
+
 </>
 ) : null}  
 
