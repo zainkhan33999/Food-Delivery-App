@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Card from "../components/Cards1";
 import Footer from '../screens/Footer';
 import Navbar from '../components/Navbar';
-
+import burger from "../assets/burger.jpg"
+import pizza from "../assets/pizza.jpg"
+import rice from "../assets/rice.jpg"
 export default function Home() {
   const [foodCat, setFoodCat] = useState([]);
   const [foodItems, setFoodItems] = useState([]);
@@ -29,6 +31,7 @@ export default function Home() {
     <div>
       <div>
         <Navbar />
+        
         <div id="cart-root"></div>
       </div>
       <div>
@@ -41,13 +44,13 @@ export default function Home() {
               </div>
             </div>
             <div className="carousel-item active">
-              <img src="https://source.unsplash.com/random/900x700/?burger" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
+              <img src={burger} className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
             </div>
             <div className="carousel-item">
-              <img src="https://source.unsplash.com/random/900x700/?pastry" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
+              <img src={pizza} className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
             </div>
             <div className="carousel-item">
-              <img src="https://source.unsplash.com/random/900x700/?barbeque" className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
+              <img src={rice}className="d-block w-100" style={{ filter: "brightness(30%)" }} alt="..." />
             </div>
           </div>
           <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">

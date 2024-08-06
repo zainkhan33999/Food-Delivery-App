@@ -80,13 +80,13 @@ export default function Card(props) {
               <h5 className="card-title">{props.foodName}</h5>
               {/* <p className="card-text">This is some random text. This is description.</p> */}
               <div className='container w-100 p-0' style={{ height: "38px" }}>
-                <select className="m-2 h-100 w-20 bg-info text-white rounded" style={{ select: "#FF0000" }} onClick={handleClick} onChange={handleQty}>
+                <select className="m-2 h-100 w-20 bg-primary text-white rounded" style={{ select: "#FF0000" }} onClick={handleClick} onChange={handleQty}>
                   {Array.from(Array(6), (e, i) => {
                     return (
                       <option key={i + 1} value={i + 1}>{i + 1}</option>)
                   })}
                 </select>
-                <select className="m-2 h-100 w-20 bg-info text-white rounded" style={{ select: "#FF0000" }} ref={priceRef} onClick={handleClick} onChange={handleOptions}>
+                <select className="m-2 h-100 w-20 bg-primary   text-white rounded" style={{ select: "#FF0000" }} ref={priceRef} onClick={handleClick} onChange={handleOptions}>
                   {priceOptions.map((i) => {
                     return <option key={i} value={i}>{i}</option>
                   })}

@@ -97,12 +97,17 @@ const handleUser = () =>{
     <Link className='btn text-success mx-1 mt-1' to="/createseller">
       Become a Seller
     </Link>
+    
     <div className="btn text-info text-primary mt-1" onClick={loadCart}>
       <Badge color="secondary" badgeContent={items.length}>
         <ShoppingCartIcon />
       </Badge>
       Cart
+      
     </div>
+    <button className='btn text-danger mx-1 mt-1'onClick={handleLogout}>
+ Logout
+    </button>
     
     {cartView && (
       <Modal onClose={() => setCartView(false)}>

@@ -3,8 +3,8 @@ const router = express.Router();
 const Vendor = require('../models/Seller'); // Update with the actual path to your model file
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken")
-const { body, validationResult } = require('express-validator');
-jwtSecret = "mynameiszainkhanilikecoffe"
+// const { body, validationResult } = require('express-validator');// 
+const jwtSecret = process.env.jwtSecret
 router.post(
   "/createvendor",
   async (req, res) => {

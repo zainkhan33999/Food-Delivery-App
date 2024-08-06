@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const mongoURI = "mongodb+srv://QuickBites:123@cluster0.j3bnfkm.mongodb.net/QuickBites";
+const mongoURI = process.env.MongoURI
 
 let cachedData = {
   food_items: [],

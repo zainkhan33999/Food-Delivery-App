@@ -1,7 +1,9 @@
 const express = require ('express')
 const app = express()
 var cors = require('cors')
-const port = 5000    
+const dotenv = require("dotenv")
+dotenv.config()
+const port = process.env.port || 6000
 const { connectDB } = require("./db"); // Use destructuring to get the connectDB function
 connectDB()
 app.use(cors())
